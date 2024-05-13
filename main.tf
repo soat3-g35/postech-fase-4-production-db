@@ -67,6 +67,7 @@ resource "postgresql_role" "application_role" {
   login              = true
   password           = "producao_appuser"
   encrypted_password = true
+  expected_version = "10.1"
 }
 
 # Create Database 
