@@ -32,6 +32,12 @@ resource "aws_security_group" "instance" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  egress {
+    from_port   = 5432
+    to_port     = 5432
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 resource "aws_db_subnet_group" "producao" {
@@ -59,27 +65,4 @@ resource "aws_db_instance" "producao" {
   tags = {
     Name = "ProducaoPostgresDB"
   }
-}
-
-provider "postgresql" {
-  scheme           = "awspostgres"
-  database         = "raw"
-  host             = aws_db_instance.producao.address
-  port             = aws_db_instance.producao.port
-  username         = aws_db_instance.producao.username
-  password         = aws_db_instance.producao.password
-  sslmode          = "disable"
-  connect_timeout  = 15
-  superuser        = false
-  expected_version = aws_db_instance.producao.engine_version
-}
-
-# Create Database 
-resource "postgresql_database" "producao" {
-  name              = "producao"
-  owner             = "postgres"
-  template          = "template0"
-  lc_collate        = "C"
-  connection_limit  = -1
-  allow_connections = true
 }
