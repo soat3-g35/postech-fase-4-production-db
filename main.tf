@@ -60,3 +60,21 @@ resource "aws_db_instance" "producao" {
     Name = "ProducaoPostgresDB"
   }
 }
+
+# Create App User
+resource "postgresql_role" "application_role" {
+    name                = "producao_appuser"
+    login               = true
+    password            = "producao_appuser"
+    encrypted_password  = true
+}
+
+# Create Database 
+resource "postgresql_database" "producao" {
+    name              = "producao"
+    owner             = "postgres"
+    template          = "template0"
+    lc_collate        = "C"
+    connection_limit  = -1
+    allow_connections = true
+}
