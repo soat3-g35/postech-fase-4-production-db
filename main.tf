@@ -64,7 +64,7 @@ resource "aws_db_instance" "producao" {
 provider "postgresql" {
   scheme           = "awspostgres"
   database         = "raw"
-  host             = "producao.cdymuwiuqbtb.us-east-1.rds.amazonaws.com"
+  host             = aws_db_instance.producao.address
   port             = aws_db_instance.producao.port
   username         = aws_db_instance.producao.username
   password         = aws_db_instance.producao.password
