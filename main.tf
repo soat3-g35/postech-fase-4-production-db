@@ -26,23 +26,15 @@ output "subnet_cidr_blocks" {
 resource "aws_security_group" "instance" {
   name   = "postgres-security-group"
   vpc_id = data.aws_vpc.selected.id
-  ingress {
-    from_port   = 5432
-    to_port     = 5432
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  egress {
-    from_port   = 5432
-    to_port     = 5432
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+  filter {
+    name   = "tag:Name"
+    values = ["g35-eks-cluster-cluster"]
   }
 }
 
 resource "aws_db_subnet_group" "producao" {
   name       = "producao"
-  subnet_ids = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
+  subnet_ids = data.aws_subnet_ids.example.ids
 
   tags = {
     Name = "Producao"
