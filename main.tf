@@ -61,6 +61,19 @@ resource "aws_db_instance" "producao" {
   }
 }
 
+provider "postgresql" {
+  scheme           = "awspostgres"
+  database         = "raw"
+  host             = aws_db_instance.producao.address
+  port             = aws_db_instance.producao.port
+  username         = aws_db_instance.producao.username
+  password         = aws_db_instance.producao.password
+  sslmode          = "require"
+  connect_timeout  = 15
+  superuser        = false
+  expected_version = aws_db_instance.producao.engine_version
+}
+
 # Create Database 
 resource "postgresql_database" "producao" {
   name              = "producao"
