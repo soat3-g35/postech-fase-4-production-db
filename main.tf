@@ -36,7 +36,7 @@ resource "aws_security_group" "instance" {
 
 resource "aws_db_subnet_group" "producao" {
   name       = "producao"
-  subnet_ids = data.aws_subnet_ids.example.ids
+  subnet_ids = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
 
   tags = {
     Name = "Producao"
