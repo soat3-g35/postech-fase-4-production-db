@@ -62,7 +62,7 @@ resource "aws_db_instance" "producao" {
 }
 
 # Create App User
-resource "postgresql_role" "application_role" {
+resource "postgresql_role" {
   name               = "producao_appuser"
   login              = true
   password           = "producao_appuser"
