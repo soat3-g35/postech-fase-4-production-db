@@ -68,7 +68,7 @@ provider "postgresql" {
   port             = aws_db_instance.producao.port
   username         = aws_db_instance.producao.username
   password         = aws_db_instance.producao.password
-  sslmode          = "require"
+  sslmode          = "disable"
   connect_timeout  = 15
   superuser        = false
   expected_version = aws_db_instance.producao.engine_version
