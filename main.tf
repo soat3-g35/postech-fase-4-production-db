@@ -43,11 +43,11 @@ resource "aws_db_subnet_group" "producao" {
   }
 }
 
-resource "aws_db_instance" "producao" {
+resource "aws_db_instance" "default" {
   identifier             = "producao"
-  db_name                = "producao"
   instance_class         = "db.t3.micro"
   allocated_storage      = 5
+  db_name                = "producao"
   engine                 = "postgres"
   engine_version         = "14.11"
   username               = "postgres"
