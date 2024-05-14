@@ -45,6 +45,7 @@ resource "aws_db_subnet_group" "producao" {
 
 resource "aws_db_instance" "producao" {
   identifier             = "producao"
+  db_name                = "producao"
   instance_class         = "db.t3.micro"
   allocated_storage      = 5
   engine                 = "postgres"
