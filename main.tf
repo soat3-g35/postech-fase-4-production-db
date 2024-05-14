@@ -47,7 +47,7 @@ resource "aws_db_instance" "producao" {
   identifier             = "producao"
   instance_class         = "db.t3.micro"
   allocated_storage      = 5
-  db_name                = "producao"
+  name                   = "producao"
   engine                 = "postgres"
   engine_version         = "14.11"
   username               = "postgres"
